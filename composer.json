@@ -1,16 +1,19 @@
 {
-    "name": "maileryio/_____",
+    "name": "maileryio/mailery-menu-sidebar",
     "type": "library",
-    "description": "_____",
+    "description": "Menu Sidebar Module for Mailery Platform",
     "keywords": [
-        "_____"
+        "mail",
+        "mailer",
+        "menu",
+        "sidebar"
     ],
-    "homepage": "https://github.com/maileryio/_____",
+    "homepage": "https://github.com/maileryio/mailery-menu-sidebar",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/maileryio/_____",
-        "issues": "https://github.com/maileryio/_____/issues",
-        "wiki": "https://github.com/maileryio/_____/wiki"
+        "source": "https://github.com/maileryio/mailery-menu-sidebar",
+        "issues": "https://github.com/maileryio/mailery-menu-sidebar/issues",
+        "wiki": "https://github.com/maileryio/mailery-menu-sidebar/wiki"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -24,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mailery\\_____\\": "src"
+            "Mailery\\Menu\\Sidebar\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mailery\\_____\\Tests\\": "tests"
+            "Mailery\\Menu\\Sidebar\\Tests\\": "tests"
         }
     },
     "scripts": {
