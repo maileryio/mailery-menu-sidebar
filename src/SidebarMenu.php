@@ -14,7 +14,7 @@ namespace Mailery\Menu\Sidebar;
 
 use Mailery\Menu\BaseMenu;
 
-class SidebarMenu extends BaseMenu
+class SidebarMenu extends BaseMenu implements SidebarMenuInterface
 {
     /**
      * {@inheritdoc}
