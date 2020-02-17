@@ -14,5 +14,7 @@ use Mailery\Menu\Sidebar\SidebarMenu;
 use Mailery\Menu\Sidebar\SidebarMenuInterface;
 
 return [
-    SidebarMenuInterface::class => SidebarMenu::class,
+    SidebarMenuInterface::class => [
+        '__class' => SidebarMenu::class,
+    ],
 ];
