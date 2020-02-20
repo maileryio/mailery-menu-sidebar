@@ -57,7 +57,7 @@ class SidebarMenu extends BaseMenu implements SidebarMenuInterface
             $label = $level > 0 ? '{label}' : '<span class="menu-title">{label}</span>';
 
             if (isset($item['icon'])) {
-                $label = Icon::widget()->options(['class' => 'menu-icon'])->name($item['icon']) . $label;
+                $label = Icon::widget()->options(['class' => 'menu-icon'])->name($item['icon']) . ' ' . $label;
             }
 
             if (isset($item['items'])) {
