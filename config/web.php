@@ -10,11 +10,9 @@ declare(strict_types=1);
  * @copyright Copyright (c) 2020, Mailery (https://mailery.io/)
  */
 
-use Mailery\Menu\Sidebar\SidebarMenu;
+use Mailery\Menu\Sidebar\SidebarMenuFactory;
 use Mailery\Menu\Sidebar\SidebarMenuInterface;
 
 return [
-    SidebarMenuInterface::class => [
-        '__class' => SidebarMenu::class,
-    ],
+    SidebarMenuInterface::class => new SidebarMenuFactory($params['menu']['sidebar']['items']),
 ];
