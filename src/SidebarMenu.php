@@ -12,20 +12,12 @@ declare(strict_types=1);
 
 namespace Mailery\Menu\Sidebar;
 
-use Mailery\Menu\BaseMenu;
+use Mailery\Menu\Menu;
 use Mailery\Menu\MenuItem;
 use Mailery\Icon\Icon;
 
-class SidebarMenu extends BaseMenu implements SidebarMenuInterface
+class SidebarMenu extends Menu implements SidebarMenuInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getLabel(): string
-    {
-        return 'Sidebar Menu';
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -43,7 +35,7 @@ class SidebarMenu extends BaseMenu implements SidebarMenuInterface
     {
         $id = 0;
         $fnCollapseKey = function () use(&$id) : string {
-            return 'sidebar-menu-item-' . ++$id;
+            return 'sidebar-item-' . ++$id;
         };
 
         $resultItems = [];
@@ -64,7 +56,7 @@ class SidebarMenu extends BaseMenu implements SidebarMenuInterface
                     $resultItem,
                     [
                         'url' => '#' . $collapseKey,
-                        'template' => '<a class="nav-link collapsed" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow'])->name('arrow-down') . '</a>',
+                        'template' => '<a class="nav-link collapsed" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow'])->name('chevron-down') . '</a>',
                         'submenuTemplate' => "\n<div class=\"collapse\" id=\"{$collapseKey}\">\n<ul class=\"nav flex-column sub-menu\">\n{items}\n</ul>\n</div>\n",
                         'items' => $this->decorateItems($resultItem['childItems'], $level + 1),
                     ]
