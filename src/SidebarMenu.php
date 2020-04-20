@@ -56,7 +56,7 @@ class SidebarMenu extends Menu implements SidebarMenuInterface
                     $resultItem,
                     [
                         'url' => '#' . $collapseKey,
-                        'template' => '<a class="nav-link collapsed" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow'])->name('chevron-down') . '</a>',
+                        'template' => '<a class="nav-link" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow'])->name('chevron-right') . '</a>',
                         'submenuTemplate' => "\n<div class=\"collapse\" id=\"{$collapseKey}\">\n<ul class=\"nav flex-column sub-menu\">\n{items}\n</ul>\n</div>\n",
                         'items' => $this->decorateItems($resultItem['childItems'], $level + 1),
                     ]
