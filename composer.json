@@ -19,7 +19,9 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4",
-        "maileryio/mailery-menu": "dev-master"
+        "maileryio/mailery-icon": "dev-master",
+        "maileryio/mailery-menu": "dev-master",
+        "yiisoft/widget": "^3.0@dev"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",

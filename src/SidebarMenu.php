@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Mailery\Menu\Sidebar;
 
+use Mailery\Icon\Icon;
 use Mailery\Menu\Menu;
 use Mailery\Menu\MenuItem;
-use Mailery\Icon\Icon;
 
 class SidebarMenu extends Menu implements SidebarMenuInterface
 {
@@ -34,19 +34,25 @@ class SidebarMenu extends Menu implements SidebarMenuInterface
     private function decorateItems(array $items, int $level = 0): array
     {
         $id = 0;
-        $fnCollapseKey = function () use(&$id) : string {
+        $fnCollapseKey = function () use (&$id) : string {
             return 'sidebar-item-' . ++$id;
         };
 
         $resultItems = [];
 
         foreach ($items as $key => $item) {
+            if (!$item instanceof MenuItem) {
+                throw new \RuntimeException('Menu item must extend MenuItem');
+            }
+
             /* @var $item MenuItem */
             $resultItem = $item->toArray();
 
             $label = $level > 0 ? '{label}' : '<span class="menu-title">{label}</span>';
             if (!empty($resultItem['icon'])) {
-                $label = Icon::widget()->options(['class' => 'menu-icon'])->name($resultItem['icon']) . ' ' . $label;
+                $label = Icon::widget()
+                    ->name($resultItem['icon'])
+                    ->options(['class' => 'menu-icon']) . ' ' . $label;
             }
 
             if (!empty($resultItem['childItems'])) {
