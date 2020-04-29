@@ -19,6 +19,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4",
+        "foxy/foxy": "^1.0",
         "maileryio/mailery-icon": "dev-master",
         "maileryio/mailery-menu": "dev-master",
         "yiisoft/widget": "^3.0@dev"
