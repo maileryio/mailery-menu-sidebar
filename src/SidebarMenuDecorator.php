@@ -13,17 +13,29 @@ declare(strict_types=1);
 namespace Mailery\Menu\Sidebar;
 
 use Mailery\Icon\Icon;
-use Mailery\Menu\Menu;
-use Mailery\Menu\MenuItem;
 
-class SidebarMenu extends Menu implements SidebarMenuInterface
+final class SidebarMenuDecorator
 {
     /**
-     * {@inheritdoc}
+     * @var array
+     */
+    private array $items;
+
+    /**
+     * @param array $items
+     */
+    public function __construct(array $items)
+    {
+        $this->items = $items;
+    }
+
+    /**
+     * @param array $items
+     * @return array
      */
     public function getItems(): array
     {
-        return $this->decorateItems(parent::getItems());
+        return $this->decorateItems($this->items);
     }
 
     /**
@@ -38,43 +50,34 @@ class SidebarMenu extends Menu implements SidebarMenuInterface
             return 'sidebar-item-' . ++$id;
         };
 
-        $resultItems = [];
-
         foreach ($items as $key => $item) {
-            if (!$item instanceof MenuItem) {
-                throw new \RuntimeException('Menu item must extend MenuItem');
-            }
-
-            /* @var $item MenuItem */
-            $resultItem = $item->toArray();
-
             $label = $level > 0 ? '{label}' : '<span class="menu-title">{label}</span>';
-            if (!empty($resultItem['icon'])) {
+            if (!empty($item['icon'])) {
                 $label = Icon::widget()
-                    ->name($resultItem['icon'])
+                    ->name($item['icon'])
                     ->options(['class' => 'menu-icon']) . ' ' . $label;
             }
 
-            if (!empty($resultItem['items'])) {
+            if (!empty($item['items'])) {
                 $collapseKey = $fnCollapseKey();
 
-                $resultItem = array_merge(
-                    $resultItem,
+                $item = array_merge(
+                    $item,
                     [
                         'url' => '#' . $collapseKey,
                         'template' => '<a class="nav-link" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow'])->name('chevron-right') . '</a>',
                         'submenuTemplate' => "\n<div class=\"collapse\" id=\"{$collapseKey}\">\n<ul class=\"nav flex-column sub-menu\">\n{items}\n</ul>\n</div>\n",
-                        'items' => $this->decorateItems($resultItem['items'], $level + 1),
+                        'items' => $this->decorateItems($item['items'], $level + 1),
                     ]
                 );
             } else {
-                $resultItem['template'] = '<a class="nav-link" href="{url}">' . $label . '</a>';
+                $item['template'] = '<a class="nav-link" href="{url}">' . $label . '</a>';
             }
 
-            $resultItems[$key] = $resultItem;
+            $items[$key] = $item;
         }
 
-        return $resultItems;
+        return $items;
     }
 
 }
