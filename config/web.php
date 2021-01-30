@@ -10,9 +10,18 @@ declare(strict_types=1);
  * @copyright Copyright (c) 2020, Mailery (https://mailery.io/)
  */
 
-use Mailery\Menu\Sidebar\SidebarMenuFactory;
+use Mailery\Menu\Menu;
 use Mailery\Menu\Sidebar\SidebarMenuInterface;
+use Mailery\Menu\Decorator\Normalizer;
+use Mailery\Menu\Decorator\Instantiator;
+use Mailery\Menu\Decorator\Sorter;
+use Yiisoft\Injector\Injector;
 
 return [
-    SidebarMenuInterface::class => new SidebarMenuFactory($params['menu']['sidebar']['items']),
+    SidebarMenuInterface::class => static function (Injector $injector) use($params) {
+        return (new Menu($params['maileryio/mailery-menu-sidebar']['items']))
+            ->withSorter(new Sorter())
+            ->withNormalizer(new Normalizer($injector))
+            ->withInstantiator(new Instantiator());
+    },
 ];
