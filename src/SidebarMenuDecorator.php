@@ -55,7 +55,10 @@ final class SidebarMenuDecorator
             if (!empty($item['icon'])) {
                 $label = Icon::widget()
                     ->name($item['icon'])
-                    ->options(['class' => 'menu-icon']) . ' ' . $label;
+                    ->options([
+                        'class' => 'menu-icon',
+                        'encode' => false,
+                    ]) . ' ' . $label;
             }
 
             if (!empty($item['items'])) {
@@ -65,7 +68,7 @@ final class SidebarMenuDecorator
                     $item,
                     [
                         'url' => '#' . $collapseKey,
-                        'template' => '<a class="nav-link" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow'])->name('chevron-right') . '</a>',
+                        'template' => '<a class="nav-link" data-toggle="collapse" href="{url}">' . $label . Icon::widget()->options(['class' => 'menu-arrow', 'encode' => false])->name('chevron-right') . '</a>',
                         'submenuTemplate' => "\n<div class=\"collapse\" id=\"{$collapseKey}\">\n<ul class=\"nav flex-column sub-menu\">\n{items}\n</ul>\n</div>\n",
                         'items' => $this->decorateItems($item['items'], $level + 1),
                     ]
