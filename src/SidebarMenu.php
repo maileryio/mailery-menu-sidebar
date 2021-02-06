@@ -13,29 +13,32 @@ declare(strict_types=1);
 namespace Mailery\Menu\Sidebar;
 
 use Mailery\Icon\Icon;
+use Mailery\Menu\MenuInterface;
 
-final class SidebarMenuDecorator
+class SidebarMenu implements MenuInterface
 {
     /**
-     * @var array
+     * @var MenuInterface
      */
-    private array $items;
+    private MenuInterface $menu;
 
     /**
-     * @param array $items
+     * @param MenuInterface $menu
      */
-    public function __construct(array $items)
+    public function __construct(MenuInterface $menu)
     {
-        $this->items = $items;
+        $this->menu = $menu;
     }
 
     /**
-     * @param array $items
      * @return array
      */
     public function getItems(): array
     {
-        return $this->decorateItems($this->items);
+        return $this->decorateItems(array_map(
+            fn ($item) => $item->toArray(),
+            $this->menu->getItems()
+        ));
     }
 
     /**
@@ -82,5 +85,4 @@ final class SidebarMenuDecorator
 
         return $items;
     }
-
 }

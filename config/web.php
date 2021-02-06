@@ -11,15 +11,19 @@ declare(strict_types=1);
  */
 
 use Mailery\Menu\Menu;
-use Mailery\Menu\Sidebar\SidebarMenuInterface;
+use Mailery\Menu\Sidebar\SidebarMenu;
 use Mailery\Menu\Decorator\Normalizer;
 use Mailery\Menu\Decorator\Instantiator;
+use Mailery\Menu\Decorator\Sorter;
 use Yiisoft\Injector\Injector;
 
 return [
-    SidebarMenuInterface::class => static function (Injector $injector) use($params) {
-        return (new Menu($params['maileryio/mailery-menu-sidebar']['items']))
-            ->withNormalizer(new Normalizer($injector))
-            ->withInstantiator(new Instantiator($injector));
+    SidebarMenu::class => static function (Injector $injector) use($params) {
+        return new SidebarMenu(
+            (new Menu($params['maileryio/mailery-menu-sidebar']['items']))
+                ->withNormalizer(new Normalizer($injector))
+                ->withInstantiator(new Instantiator($injector))
+                ->withSorter(new Sorter())
+        );
     },
 ];
