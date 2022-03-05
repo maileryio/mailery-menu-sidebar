@@ -21,8 +21,7 @@
         "php": "^7.4",
         "foxy/foxy": "^1.0",
         "maileryio/mailery-icon": "dev-master",
-        "maileryio/mailery-menu": "dev-master",
-        "yiisoft/widget": "^3.0@dev"
+        "maileryio/mailery-menu": "dev-master"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
