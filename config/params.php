@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use Mailery\Menu\Sidebar\SidebarViewInjection;
+use Yiisoft\Definitions\Reference;
+
 /**
  * Menu Sidebar Module for Mailery Platform
  * @link      https://github.com/maileryio/mailery-menu-sidebar
@@ -13,5 +16,11 @@ declare(strict_types=1);
 return [
     'maileryio/mailery-menu-sidebar' => [
         'items' => [],
+    ],
+
+    'yiisoft/yii-view' => [
+        'injections' => [
+            Reference::to(SidebarViewInjection::class),
+        ],
     ],
 ];
